@@ -766,28 +766,54 @@ public class MessageManager implements OnLoadListener, OnPacketListener, OnDisco
             return false;
         }
         AbstractChat abstractChat = getChat(account, user);
-        return abstractChat != null && abstractChat instanceof RegularChat && abstractChat.isStatusTrackingEnabled();
+        return abstractChat != null && abstractChat instanceof RegularChat && (isVisibleChat(abstractChat) || abstractChat.isActive());
     }
 
     @Override
-    public void onStatusChanged(AccountJid account, UserJid user, String statusText) {
-        if (isStatusTrackingEnabled(account, user)) {
-            AbstractChat chat = getChat(account, user);
-            if (chat != null) {
-                chat.newAction(user.getJid().getResourceOrNull(), statusText, ChatAction.status);
-            }
-        }
+    public void onStatusChanged(AccountJid account, final UserJid user, final String statusText) {
+        // temporary disabled
+//        if (isStatusTrackingEnabled(account, user)) {
+//            final AbstractChat chat = getChat(account, user);
+//            if (chat != null) {
+//                Application.getInstance().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // fix for saving to realm
+//                        String text;
+//                        if (statusText != null) {
+//                            if (!statusText.isEmpty() && statusText.length() > 0) text = statusText;
+//                            else text = " ";
+//                        } else text = " ";
+//                        // create new action
+//                        chat.newAction(user.getJid().getResourceOrNull(), text, ChatAction.status);
+//                    }
+//                });
+//            }
+//        }
     }
 
     @Override
-    public void onStatusChanged(AccountJid account, UserJid user, StatusMode statusMode, String statusText) {
-        if (isStatusTrackingEnabled(account, user)) {
-            AbstractChat chat = getChat(account, user);
-            if (chat != null) {
-                chat.newAction(user.getJid().getResourceOrNull(),
-                        statusText, ChatAction.getChatAction(statusMode));
-            }
-        }
+    public void onStatusChanged(AccountJid account, final UserJid user, final StatusMode statusMode, final String statusText) {
+        // temporary disabled
+//        if (isStatusTrackingEnabled(account, user)) {
+//            final AbstractChat chat = getChat(account, user);
+//            if (chat != null) {
+//                Application.getInstance().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // fix for saving to realm
+//                        String text;
+//                        if (statusText != null) {
+//                            if (!statusText.isEmpty() && statusText.length() > 0) text = statusText;
+//                            else text = " ";
+//                        } else text = " ";
+//                        // create new action
+//                        chat.newAction(user.getJid().getResourceOrNull(),
+//                                text, ChatAction.getChatAction(statusMode));
+//                    }
+//                });
+//            }
+//        }
     }
 
     public void acceptMucPrivateChat(AccountJid account, UserJid user) throws UserJid.UserJidCreateException {

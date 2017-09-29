@@ -140,6 +140,7 @@ public class XabberAccountInfoActivity extends BaseLoginActivity implements Tool
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        if (menu == null) return true;
         XabberAccount account = XabberAccountManager.getInstance().getAccount();
         if (account != null) {
             menu.findItem(R.id.action_cancel_register).setVisible(!XabberAccount.STATUS_REGISTERED.equals(account.getAccountStatus()));
@@ -201,10 +202,12 @@ public class XabberAccountInfoActivity extends BaseLoginActivity implements Tool
 
     @Override
     protected void showProgress(String title) {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(title);
-        progressDialog.setMessage(getResources().getString(R.string.progress_message));
-        progressDialog.show();
+        if (!isFinishing()) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle(title);
+            progressDialog.setMessage(getResources().getString(R.string.progress_message));
+            progressDialog.show();
+        }
     }
 
     @Override

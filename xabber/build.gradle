@@ -3,7 +3,6 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'realm-android'
 apply plugin: 'com.frogermcs.androiddevmetrics'
 apply plugin: 'io.fabric'
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 25
@@ -12,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 395
-        versionName '2.1(395)'
+        versionCode 401
+        versionName '2.1(401)'
     }
 
     lintOptions {
@@ -150,6 +149,7 @@ dependencies {
 
     compile "com.android.support:design:$supportVersion"
     compile "com.android.support:support-v13:$supportVersion"
+    compile 'com.android.support:multidex:1.0.1'
 
     compile 'com.github.Str4tocaster:otr4j:custom-SNAPSHOT'
     compile 'com.google.zxing:android-integration:3.3.0'
@@ -165,9 +165,9 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.0'
 
     //social
-    compile 'com.facebook.android:facebook-android-sdk:4.23.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.27.0'
     compile 'com.twitter.sdk.android:twitter:3.0.0'
-    compile 'com.google.android.gms:play-services-auth:9.0.0'
+    compile 'com.google.android.gms:play-services-auth:11.4.0'
     compile ('com.google.api-client:google-api-client-android:1.22.0') {
         exclude module: 'httpclient'
     }
@@ -184,6 +184,7 @@ dependencies {
         transitive = true;
     }
 }
+apply plugin: 'com.google.gms.google-services'
 
 configurations {
     all*.exclude group: 'xpp3', module: 'xpp3'
